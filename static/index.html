@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="/static/pico.amber.min.css">
+    <title>Ainur</title>
+    <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; }
+    </style>
+</head>
+<body>
+
+<nav class="container">
+    <ul>
+        <li><strong>Ainur</strong></li>
+    </ul>
+    <ul>
+        <li><a href="/">Home</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <p>Sing users into existence...</p>
+
+    <form method="post" action="/provision">
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Gandalf" required>
+
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" placeholder="the Grey" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="gandalfthegrey@anduril.com" required>
+
+        <fieldset>
+            <legend>Services</legend>
+            <label>
+                <input type="checkbox" name="services" value="gitlab">
+                GitLab
+            </label>
+            <label>
+                <input type="checkbox" name="services" value="vault">
+                VaultWarden
+            </label>
+            <label>
+                <input type="checkbox" name="services" value="mattermost">
+                Mattermost
+            </label>
+            <label>
+                <input type="checkbox" name="services" value="jira">
+                Wiki
+            </label>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+</main>
+
+<footer class="container">
+    <small>Project by Mason Putney</small>
+</footer>
+
+</body>
+</html>
