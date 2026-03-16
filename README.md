@@ -8,3 +8,9 @@
 5. `go get -u github.com/go-chi/chi/v5` (https://github.com/go-chi/chi)
 6. `Downloaded htmx.min.js.js` (https://htmx.org/) into static dir
 7. `Downloaded pico css directly` (https://picocss.com/docs/version-picker) into static dir
+8. `Download pico colors css directly` (https://picocss.com/docs/color-picker) into static dir
+9. `go mod tidy`
+
+
+## Run server
+`go run cmd/main.go`

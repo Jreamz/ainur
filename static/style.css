@@ -1,0 +1,22 @@
+:root {
+    --pico-border-radius: 0.15rem;
+    --pico-typography-spacing-vertical: 1rem;
+    --pico-form-element-spacing-vertical: 0.75rem;
+    --pico-form-element-spacing-horizontal: 1rem;
+    --pico-font-family: "JetBrains Mono", "Courier New", monospace;
+}
+
+h1, h2, h3, p, label, legend, small, a, button, li {
+    font-family: "JetBrains Mono", "Courier New", monospace;
+}
+
+button {
+    --pico-font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.ainur-brand {
+    font-size: xx-large;
+    letter-spacing: 0.15em;
+}

@@ -1,0 +1,26 @@
+{{define "provision-success"}}
+<dialog open>
+    <article>
+        <header class="pico-background-jade-600">
+            <form method="dialog">
+                <button aria-label="Close" rel="prev"></button>
+            </form>
+            <p><strong>Success: New user provisioned</strong></p>
+        </header>
+        <p></p>
+        <ul>
+            <li>First Name: {{.FirstName}}</li>
+            <li>Last Name: {{.LastName}}</li>
+            <li>Email: ({{.Email}})</li>
+            <li>Services: {{range .Services}} <kbd>{{.}}</kbd> {{end}}</li>
+        </ul>
+
+        <footer>
+            <form method="dialog">
+                <button class="secondary">Close</button>
+            </form>
+        </footer>
+        <p></p>
+    </article>
+</dialog>
+{{end}}

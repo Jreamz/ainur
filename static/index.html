@@ -1,10 +1,16 @@
 <!doctype html>
 <html lang="en">
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="/static/pico.amber.min.css">
+    <link rel="stylesheet" href="/static/pico.colors.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/static/favicon.ico">
+    <script src="/static/htmx.min.js.js"></script>
     <title>Ainur</title>
     <style>
         body { min-height: 100vh; display: flex; flex-direction: column; }
@@ -15,17 +21,17 @@
 
 <nav class="container">
     <ul>
-        <li><strong>Ainur</strong></li>
+        <li><strong class="ainur-brand">Ainur</strong></li>
     </ul>
     <ul>
-        <li><a href="/">Home</a></li>
+        <li><a href="/">Reset</a></li>
     </ul>
 </nav>
 
 <main class="container">
     <p>Sing users into existence...</p>
 
-    <form method="post" action="/provision">
+    <form>
         <label for="first_name">First Name</label>
         <input type="text" id="first_name" name="first_name" placeholder="Gandalf" required>
 
@@ -33,16 +39,16 @@
         <input type="text" id="last_name" name="last_name" placeholder="the Grey" required>
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="gandalfthegrey@anduril.com" required>
+        <input type="email" id="email" name="email" placeholder="gandalfthegrey@treemail.com" required>
 
         <fieldset>
-            <legend>Services</legend>
+            <legend>Service(s)</legend>
             <label>
                 <input type="checkbox" name="services" value="gitlab">
                 GitLab
             </label>
             <label>
-                <input type="checkbox" name="services" value="vault">
+                <input type="checkbox" name="services" value="vaultwarden">
                 VaultWarden
             </label>
             <label>
@@ -54,9 +60,21 @@
                 Wiki
             </label>
         </fieldset>
-
-        <button type="submit">Submit</button>
+        <button
+                type="submit"
+                hx-post="/provision"
+                hx-target="#result"
+                hx-swap="innerHTML"
+                hx-disabled-elt="this"
+        >
+            Create
+        </button>
     </form>
+
+    <div id="result">
+        <progress class="htmx-indicator"></progress>
+    </div>
+
 </main>
 
 <footer class="container">
