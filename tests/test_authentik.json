@@ -1,0 +1,16 @@
+{
+  "username": "string",
+  "name": "string",
+  "is_active": true,
+  "last_login": "2024-07-29T15:51:28.071Z",
+  "groups": [
+    "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  ],
+  "roles": [
+    "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  ],
+  "email": "user@example.com",
+  "attributes": {},
+  "path": "string",
+  "type": "internal"
+}

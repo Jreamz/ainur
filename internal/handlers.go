@@ -11,7 +11,6 @@ type ProvisionRequest struct {
 	FirstName string
 	LastName  string
 	Email     string
-	Clearance string
 	Services  []string
 }
 
@@ -26,7 +25,7 @@ func RootHandler(tmpl *template.Template) http.HandlerFunc {
 }
 
 // ProvisionHandler renders the provision-form fragment or provsion-validate fragment and returns http.HandlerFunc
-func ProvisionHandler(tmpl *template.Template) http.HandlerFunc {
+func ProvisionHandler(tmpl *template.Template, client *AuthentikClient) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := r.ParseForm()
 		if err != nil {
@@ -51,14 +50,20 @@ func ProvisionHandler(tmpl *template.Template) http.HandlerFunc {
 			return
 		}
 
-		// TODO API calls to endpoints here
-
-		// API calls success, render success page
-		err = tmpl.ExecuteTemplate(w, "provision-failure", provisionRequest)
+		_, err = client.CreateUserRequest(provisionRequest)
 		if err != nil {
+			// API call fails, render failure fragment
+			err = tmpl.ExecuteTemplate(w, "provision-failure", provisionRequest)
+			if err != nil {
+				return
+			}
 			return
 		}
 
-		// API calls failed, render error page
+		// API calls success, render success fragment
+		err = tmpl.ExecuteTemplate(w, "provision-success", provisionRequest)
+		if err != nil {
+			return
+		}
 	}
 }

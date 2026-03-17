@@ -14,3 +14,8 @@
 
 ## Run server
 `go run cmd/main.go`
+
+
+## References
+- Authentik API: https://pkg.go.dev/goauthentik.io/api/v3@v3.2026020.16#section-readme
+- Authentik Dev docs: https://docs.goauthentik.io/developer-docs/
