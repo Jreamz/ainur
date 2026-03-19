@@ -22,10 +22,10 @@ type ProvisionRequest struct {
 	Services  []string
 }
 
-// RootHandler closure renders the index.html template and returns http.HandlerFunc
+// RootHandler closure renders the home.html template and returns http.HandlerFunc
 func RootHandler(tmpl *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		err := tmpl.ExecuteTemplate(w, "index.html", nil)
+		err := tmpl.ExecuteTemplate(w, "home.html", nil)
 		if err != nil {
 			return
 		}
@@ -118,7 +118,7 @@ func ProvisionHandler(tmpl *template.Template, client *AuthentikClient) http.Han
 			return
 		}
 
-		// API calls success, render success fragment
+		// API call success, render success fragment
 		err = tmpl.ExecuteTemplate(w, "provision-success", provisionRequest)
 		if err != nil {
 			return

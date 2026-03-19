@@ -18,11 +18,13 @@ func main() {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.URLFormat)
 
-	// Serve all HTML
+	// Serve all CSS, HTMX
 	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	// Render all templates
-	tmpl := template.Must(template.ParseGlob("static/*.html"))
+	// Render all templates and fragments
+	tmpl := template.New("")
+	template.Must(tmpl.ParseGlob("static/templates/*.html"))
+	template.Must(tmpl.ParseGlob("static/fragments/*.html"))
 
 	// Create a request client
 	client := internal.NewAuthentikClient("https://api.test.com", "token")
