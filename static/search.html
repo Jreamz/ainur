@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="/static/pico.amber.min.css">
+    <link rel="stylesheet" href="/static/pico.colors.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/static/favicon.ico">
+    <script src="/static/htmx.min.js.js"></script>
+    <title>Ainur</title>
+    <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; }
+    </style>
+</head>
+
+<body>
+<nav class="container">
+    <ul>
+        <li><strong class="ainur-brand"><a href="/">Ainur</a></strong></li>
+    </ul>
+    <ul>
+        <li><a href="/">Home</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <p>Search for a user via email...</p>
+    <form
+          hx-get="/search-results"
+          hx-target="#result"
+          hx-swap="innerHTML"
+          hx-indicator="#loading"
+    >
+        <fieldset role="group">
+        <input name="search" placeholder="gandalfthegrey@treemail.com" />
+        <input type="submit" value="Search" />
+        </fieldset>
+    </form>
+
+    <progress id="loading" class="htmx-indicator"></progress>
+    <div id="result">
+    </div>
+
+</main>
+
+<footer class="container">
+    <small>Project by Mason Putney</small>
+</footer>
+
+</body>
+</html>

@@ -30,6 +30,8 @@ func main() {
 	// Routes
 	r.Get("/", internal.RootHandler(tmpl))
 	r.Post("/provision", internal.ProvisionHandler(tmpl, client))
+	r.Get("/search", internal.SearchHandler(tmpl))
+	r.Get("/search-results", internal.SearchResultsHandler(tmpl))
 
 	// Start server - this block forever, nothing runs after this
 	srvErr := http.ListenAndServe(":3000", r)

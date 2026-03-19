@@ -16,6 +16,11 @@ button {
     letter-spacing: 0.1em;
 }
 
+td button {
+    padding: 0.25rem 0.5rem;
+    width: auto;
+}
+
 .ainur-brand {
     font-size: xx-large;
     letter-spacing: 0.15em;

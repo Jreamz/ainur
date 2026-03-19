@@ -1,0 +1,49 @@
+{{define "search-results"}}
+<table class="striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{range .}}
+    <tr>
+        <td>{{.Name}}</td>
+        <td>{{.Email}}</td>
+        <td>
+            <button class="secondary outline"
+                    hx-post="/users/{{.ID}}/reset-password"
+                    hx-target="#result"
+                    hx-swap="innerHTML"
+                    hx-confirm="Reset password for {{.Name}}?"
+                    data-tooltip="Reset Password"
+            >R</button>
+            <button class="secondary outline"
+                    hx-post="/users/{{.ID}}/update-user"
+                    hx-target="#result"
+                    hx-swap="innerHTML"
+                    hx-confirm="Update user for {{.Name}}?"
+                    data-tooltip="Update User"
+            >U</button>
+            <button class="secondary outline"
+                    hx-post="/users/{{.ID}}/update-user"
+                    hx-target="#result"
+                    hx-swap="innerHTML"
+                    hx-confirm="Update user for {{.Name}}?"
+                    data-tooltip="Generate Password Link"
+            >G</button>
+            <button class="secondary outline"
+                    hx-delete="/users/{{.ID}}"
+                    hx-target="#result"
+                    hx-swap="innerHTML"
+                    hx-confirm="Delete {{.Name}}?"
+                    data-tooltip="Delete User"
+            >D</button>
+        </td>
+    </tr>
+    {{end}}
+    </tbody>
+</table>
+{{end}}
