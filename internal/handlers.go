@@ -4,7 +4,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"time"
 )
 
 // User represents a user object
@@ -37,41 +36,18 @@ func SearchHandler(tmpl *template.Template) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := tmpl.ExecuteTemplate(w, "search.html", nil)
 		if err != nil {
+			log.Printf("template error: %v", err)
 			return
 		}
 	}
 }
 
-func SearchResultsHandler(tmpl *template.Template) http.HandlerFunc {
+func SearchResultsHandler(tmpl *template.Template, client *AuthentikClient) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		query := r.URL.Query().Get("search")
 		log.Printf("searching for: %s", query)
 
-		// Just a fake delay to simulate api and trigger the progress bar
-		time.Sleep(3 * time.Second)
-
-		users := []User{
-			{ID: 1, Name: "Gandalf the Grey", Email: "gandalf@treemail.com"},
-			{ID: 2, Name: "Aragorn Elessar", Email: "aragorn@gondor.com"},
-			{ID: 3, Name: "Legolas Greenleaf", Email: "legolas@mirkwood.com"},
-			{ID: 4, Name: "Gimli son of Gloin", Email: "gimli@erebor.com"},
-			{ID: 5, Name: "Frodo Baggins", Email: "frodo@shire.com"},
-			{ID: 6, Name: "Samwise Gamgee", Email: "sam@shire.com"},
-			{ID: 7, Name: "Boromir of Gondor", Email: "boromir@gondor.com"},
-			{ID: 8, Name: "Peregrin Took", Email: "pippin@shire.com"},
-			{ID: 9, Name: "Meriadoc Brandybuck", Email: "merry@shire.com"},
-			{ID: 10, Name: "Elrond Halfelven", Email: "elrond@rivendell.com"},
-			{ID: 11, Name: "Gandalf the Grey", Email: "gandalf@treemail.com"},
-			{ID: 12, Name: "Aragorn Elessar", Email: "aragorn@gondor.com"},
-			{ID: 13, Name: "Legolas Greenleaf", Email: "legolas@mirkwood.com"},
-			{ID: 14, Name: "Gimli son of Gloin", Email: "gimli@erebor.com"},
-			{ID: 15, Name: "Frodo Baggins", Email: "frodo@shire.com"},
-			{ID: 16, Name: "Samwise Gamgee", Email: "sam@shire.com"},
-			{ID: 17, Name: "Boromir of Gondor", Email: "boromir@gondor.com"},
-			{ID: 18, Name: "Peregrin Took", Email: "pippin@shire.com"},
-			{ID: 19, Name: "Meriadoc Brandybuck", Email: "merry@shire.com"},
-			{ID: 20, Name: "Elrond Halfelven", Email: "elrond@rivendell.com"},
-		}
+		users, _ := client.SearchUsersList(query)
 
 		err := tmpl.ExecuteTemplate(w, "search-results", users)
 		if err != nil {

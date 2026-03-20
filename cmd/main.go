@@ -26,14 +26,14 @@ func main() {
 	template.Must(tmpl.ParseGlob("static/templates/*.html"))
 	template.Must(tmpl.ParseGlob("static/fragments/*.html"))
 
-	// Create a request client
-	client := internal.NewAuthentikClient("https://api.test.com", "token")
+	// Create a request client with test token for development
+	client := internal.NewAuthentikClient("localhost:9000", "hSaFaU1bxtWqFiWAJi3yPj7YciMqrWR2WFd541oj2kZ1bx1kYsFNY4Qh8HSX")
 
 	// Routes
 	r.Get("/", internal.RootHandler(tmpl))
 	r.Post("/provision", internal.ProvisionHandler(tmpl, client))
 	r.Get("/search", internal.SearchHandler(tmpl))
-	r.Get("/search-results", internal.SearchResultsHandler(tmpl))
+	r.Get("/search-results", internal.SearchResultsHandler(tmpl, client))
 
 	// Start server - this block forever, nothing runs after this
 	srvErr := http.ListenAndServe(":3000", r)
