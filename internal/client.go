@@ -22,7 +22,7 @@ func NewAuthentikClient(endpoint, token string) *AuthentikClient {
 	}
 }
 
-func (c *AuthentikClient) CreateUserRequest(pr *ProvisionRequest) (*authentik.User, error) {
+func (c *AuthentikClient) CreateUserRequest(pr *CreateUserRequest) (*authentik.User, error) {
 	userRequest := *authentik.NewUserRequest(pr.Email, pr.FirstName+" "+pr.LastName)
 	userRequest.SetEmail(pr.Email)
 	user, _, err := c.client.CoreApi.CoreUsersCreate(context.Background()).UserRequest(userRequest).Execute()

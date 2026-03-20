@@ -13,8 +13,8 @@ type User struct {
 	Email string
 }
 
-// ProvisionRequest is the request object containing the form data
-type ProvisionRequest struct {
+// CreateUserRequest is the request object containing the form data
+type CreateUserRequest struct {
 	FirstName string
 	LastName  string
 	Email     string
@@ -67,8 +67,8 @@ func CreateUserHandler(tmpl *template.Template, client *AuthentikClient) http.Ha
 			return
 		}
 
-		// Create a new ProvisionRequest object from form data
-		provisionRequest := &ProvisionRequest{
+		// Create a new CreateUserRequest object from form data
+		request := &CreateUserRequest{
 			FirstName: r.FormValue("first_name"),
 			LastName:  r.FormValue("last_name"),
 			Email:     r.FormValue("email"),
@@ -76,8 +76,8 @@ func CreateUserHandler(tmpl *template.Template, client *AuthentikClient) http.Ha
 		}
 
 		// Form validation on any empty fields
-		if provisionRequest.FirstName == "" || provisionRequest.LastName == "" || provisionRequest.Email == "" || len(provisionRequest.Services) == 0 {
-			err := tmpl.ExecuteTemplate(w, "form-validate", provisionRequest)
+		if request.FirstName == "" || request.LastName == "" || request.Email == "" || len(request.Services) == 0 {
+			err := tmpl.ExecuteTemplate(w, "form-validate", request)
 			if err != nil {
 				log.Printf("error parsing form: %v", err)
 				return
@@ -86,10 +86,10 @@ func CreateUserHandler(tmpl *template.Template, client *AuthentikClient) http.Ha
 		}
 
 		// Create the user request
-		_, err = client.CreateUserRequest(provisionRequest)
+		_, err = client.CreateUserRequest(request)
 		if err != nil {
 			// API call fails, render failure fragment
-			err = tmpl.ExecuteTemplate(w, "create-form-failure", provisionRequest)
+			err = tmpl.ExecuteTemplate(w, "create-form-failure", request)
 			if err != nil {
 				log.Printf("error parsing form: %v", err)
 				return
@@ -98,7 +98,7 @@ func CreateUserHandler(tmpl *template.Template, client *AuthentikClient) http.Ha
 		}
 
 		// API call success, render success fragment
-		err = tmpl.ExecuteTemplate(w, "create-form-success", provisionRequest)
+		err = tmpl.ExecuteTemplate(w, "create-form-success", request)
 		if err != nil {
 			log.Printf("error parsing form: %v", err)
 			return
