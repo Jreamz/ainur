@@ -6,6 +6,11 @@
     --pico-font-family: "JetBrains Mono", "Courier New", monospace;
 }
 
+.ainur-brand {
+    font-size: xx-large;
+    letter-spacing: 0.15em;
+}
+
 h1, h2, h3, p, label, legend, small, a, button, li {
     font-family: "JetBrains Mono", "Courier New", monospace;
 }
@@ -16,12 +21,23 @@ button {
     letter-spacing: 0.1em;
 }
 
-td button {
-    padding: 0.25rem 0.5rem;
-    width: auto;
+table {
+    table-layout: fixed;
+    width: 100%;
 }
 
-.ainur-brand {
-    font-size: xx-large;
-    letter-spacing: 0.15em;
+td button {
+    padding: 0.25rem 0.25rem;
+    width: 0.75rem;
+    font-size: 0.75rem;
+    margin: 0.25rem;
+}
+
+[data-tooltip]::before {
+    background-color: var(--pico-primary-background);
+    color: var(--pico-primary-inverse);
+}
+
+[data-tooltip]::after {
+    border-top-color: var(--pico-primary-background);
 }

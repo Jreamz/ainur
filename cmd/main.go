@@ -31,7 +31,7 @@ func main() {
 
 	// Routes
 	r.Get("/", internal.RootHandler(tmpl))
-	r.Post("/provision", internal.ProvisionHandler(tmpl, client))
+	r.Post("/provision", internal.CreateUserHandler(tmpl, client))
 	r.Get("/search", internal.SearchHandler(tmpl))
 	r.Get("/search-results", internal.SearchResultsHandler(tmpl, client))
 

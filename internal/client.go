@@ -24,8 +24,9 @@ func NewAuthentikClient(endpoint, token string) *AuthentikClient {
 
 func (c *AuthentikClient) CreateUserRequest(pr *ProvisionRequest) (*authentik.User, error) {
 	userRequest := *authentik.NewUserRequest(pr.Email, pr.FirstName+" "+pr.LastName)
+	userRequest.SetEmail(pr.Email)
 	user, _, err := c.client.CoreApi.CoreUsersCreate(context.Background()).UserRequest(userRequest).Execute()
-	log.Printf("authentik error: %v", err)
+	log.Printf("create user error: %v", err)
 	return user, err
 }
 

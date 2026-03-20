@@ -57,8 +57,8 @@ func SearchResultsHandler(tmpl *template.Template, client *AuthentikClient) http
 	}
 }
 
-// ProvisionHandler renders the provision-form fragment or provision-validate fragment and returns http.HandlerFunc
-func ProvisionHandler(tmpl *template.Template, client *AuthentikClient) http.HandlerFunc {
+// CreateUserHandler renders the provision-form fragment or provision-validate fragment and returns http.HandlerFunc
+func CreateUserHandler(tmpl *template.Template, client *AuthentikClient) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := r.ParseForm()
 		if err != nil {
@@ -76,8 +76,9 @@ func ProvisionHandler(tmpl *template.Template, client *AuthentikClient) http.Han
 
 		// Form validation on any empty fields
 		if provisionRequest.FirstName == "" || provisionRequest.LastName == "" || provisionRequest.Email == "" || len(provisionRequest.Services) == 0 {
-			err := tmpl.ExecuteTemplate(w, "provision-validate", provisionRequest)
+			err := tmpl.ExecuteTemplate(w, "form-validate", provisionRequest)
 			if err != nil {
+				log.Printf("error parsing form: %v", err)
 				return
 			}
 			return
@@ -87,16 +88,18 @@ func ProvisionHandler(tmpl *template.Template, client *AuthentikClient) http.Han
 		_, err = client.CreateUserRequest(provisionRequest)
 		if err != nil {
 			// API call fails, render failure fragment
-			err = tmpl.ExecuteTemplate(w, "provision-failure", provisionRequest)
+			err = tmpl.ExecuteTemplate(w, "create-form-failure", provisionRequest)
 			if err != nil {
+				log.Printf("error parsing form: %v", err)
 				return
 			}
 			return
 		}
 
 		// API call success, render success fragment
-		err = tmpl.ExecuteTemplate(w, "provision-success", provisionRequest)
+		err = tmpl.ExecuteTemplate(w, "create-form-success", provisionRequest)
 		if err != nil {
+			log.Printf("error parsing form: %v", err)
 			return
 		}
 	}

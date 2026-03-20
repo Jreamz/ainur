@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/favicon.ico">
     <script src="/static/htmx.min.js.js"></script>
-    <title>Ainur</title>
+    <title>Ainur - Search</title>
     <style>
         body { min-height: 100vh; display: flex; flex-direction: column; }
         main { flex: 1; }
@@ -20,7 +20,7 @@
 <body>
 <nav class="container">
     <ul>
-        <li><strong class="ainur-brand"><a href="/">Ainur</a></strong></li>
+        <li><strong class="ainur-brand"><a href="/">AINUR</a></strong></li>
     </ul>
     <ul>
         <li><a href="/">Home</a></li>
@@ -29,6 +29,7 @@
 
 <main class="container">
     <p>Search for a user...</p>
+    <hr>
     <form
           hx-get="/search-results"
           hx-target="#result"
