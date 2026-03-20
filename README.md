@@ -1,6 +1,6 @@
 # Ainur
 
-HARP - Highside Account Resource Provisioner
+HARP - High Account Resource Provisioner
 
 A lightweight internal user provisioning tool built with Go, Chi, HTMX, and Pico CSS. Ainur provides a web interface for creating and managing users in Authentik, which acts as the SSO identity provider for downstream services.
 
