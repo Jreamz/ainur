@@ -42,6 +42,7 @@ func SearchHandler(tmpl *template.Template) http.HandlerFunc {
 	}
 }
 
+// SearchResultsHandler closure calls the client SearchUsersList, renders search-results htmx fragment and returns http.HandlerFunc
 func SearchResultsHandler(tmpl *template.Template, client *AuthentikClient) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		query := r.URL.Query().Get("search")
