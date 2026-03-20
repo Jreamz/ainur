@@ -6,13 +6,6 @@ import (
 	"net/http"
 )
 
-// User represents a user object
-type User struct {
-	ID    int
-	Name  string
-	Email string
-}
-
 // CreateUserRequest is the request object containing the form data
 type CreateUserRequest struct {
 	FirstName string
